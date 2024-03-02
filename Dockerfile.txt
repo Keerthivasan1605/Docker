@@ -3,7 +3,7 @@ FROM alpine:latest
 WORKDIR /app
 
 COPY requirements.txt /app
-COPY devops /app/devops  # Ensure the correct path
+COPY devops /app # Ensure the correct path
 
 RUN apk update && \
     apk add --no-cache python3 py3-pip && \
