@@ -3,7 +3,7 @@ FROM alpine:latest
 WORKDIR /app
 
 COPY requirements.txt /app
-COPY devops /app
+COPY devops /app/devops  # Ensure the correct path
 
 # Install required packages
 RUN apk update && \
