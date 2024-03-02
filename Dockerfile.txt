@@ -3,18 +3,20 @@ FROM alpine:latest
 WORKDIR /app
 
 COPY requirements.txt /app
-COPY devops /app
+COPY devops /app/devops
 
-# Install required packages
 RUN apk update && \
     apk add --no-cache python3 py3-pip && \
     python3 -m venv venv && \
     source venv/bin/activate && \
     pip install --upgrade pip && \
-    pip install -r requirements.txt
+    pip install -r requirements.txt && \
+    deactivate  # deactivate the virtual environment before CMD
 
-ENTRYPOINT ["python3"]
-CMD ["manage.py", "runserver", "0.0.0.0:8000"]
+EXPOSE 8000
+
+CMD ["venv/bin/python", "devops/manage.py", "runserver", "0.0.0.0:8000"]
+
 
 
 
