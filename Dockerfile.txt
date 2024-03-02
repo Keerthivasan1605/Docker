@@ -5,7 +5,6 @@ WORKDIR /app
 COPY requirements.txt /app
 COPY devops /app/devops  # Ensure the correct path
 
-# Install required packages
 RUN apk update && \
     apk add --no-cache python3 py3-pip && \
     python3 -m venv venv && \
@@ -13,7 +12,9 @@ RUN apk update && \
     pip install --upgrade pip && \
     pip install -r requirements.txt
 
-WORKDIR /app/devops
+EXPOSE 8000
+
+CMD ["python", "devops/manage.py", "runserver", "0.0.0.0:8000"]
 
 
 
